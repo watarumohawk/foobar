@@ -5,3 +5,7 @@
 ### Minion Labor Shifts
 
 My solution could pass 7 test cases out of 10. Not all...
+
+### The cake is not a lie
+
+Solved this.
