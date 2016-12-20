@@ -41,7 +41,7 @@ def answer(data, n):
 
         match = re.findall(pattern, str(number))
 
-        # when number is 0~99
+        # when number is 0~99 & number is int
         if match and isinstance(number, int):
             number_dict[number] = copied_data.count(number)
 
@@ -65,7 +65,7 @@ def answer(data, n):
 # [1, 2, 4, 5]
 
 n = 3
-data = ['1', '.', 2, 3, 3, 3, 4, 5, 5, 6, 6, 6, 6, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 11, 11, 11]
+data = [1, 1, 2, 3, 3, 3, 4, 5, 5, 6, 6, 6, 6, 7, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 10, 10, 11, 11, 11]
 # [2, 3, 4, 5, 7, 10, 11]
 
 # n = 6
