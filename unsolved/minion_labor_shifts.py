@@ -41,14 +41,19 @@ def answer(data, n):
 
         match = re.findall(pattern, str(number))
 
-        # when number is 0~99 & number is int
-        if match and isinstance(number, int):
-            number_dict[number] = copied_data.count(number)
+        # when number is 0~99
+        if match:
 
-            if number_dict[number] > n:
-                del number_dict[number]
+            matched_num = int(match[0])
 
-    result = number_dict.keys()
+            number_dict[matched_num] = copied_data.count(matched_num)
+
+            print 'number_dict: ', number_dict
+
+            if number_dict[matched_num] > n:
+                del number_dict[matched_num]
+
+    result = number_dict.keys() # Should be a list of int
 
     return result
 
