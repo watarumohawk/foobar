@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Power Hungry
 ============
@@ -30,4 +31,58 @@ Output:
 """
 
 def answer(xs):
-    # your code here
+    input_list = xs
+    positive_list = []
+    negative_list = []
+
+    for i, num in enumerate(input_list):
+        if num in range(1, 1001):
+            # 正の数
+            positive_list.append(num)
+        elif num in range(-1001, 0):
+            # 負の数
+            negative_list.append(num)
+
+    # 大きい順に並べ替え
+    positive_list.reverse()
+    print positive_list
+
+    # 絶対値が大きい順に並べ替え
+    negative_list.reverse()
+    print negative_list
+
+    multi_positive = 1
+    multi_negative = 1
+
+    # 正の数の掛け算の合計
+    for i, num in enumerate(positive_list):
+        multi_positive *= num
+
+    print multi_positive
+
+    # 負の数の掛け算の合計
+    negative_list_length = len(negative_list)
+    if negative_list_length % 2 == 0:
+        # 偶数個の要素
+        for i, num in enumerate(negative_list):
+            print 'num:', num
+            multi_negative *= num
+    else:
+        # 奇数個の要素
+        for i in range(len(negative_list) - 1):
+            print 'num:', negative_list[i]
+            multi_negative *= negative_list[i]
+
+    print multi_negative
+
+    result = str(multi_positive * multi_negative)
+
+    return result
+
+# xs = [2, 0, 2, 2, 0]
+#"8"
+
+xs = [-2, -3, 4, -5, -101, -102, 0]
+#"60"
+
+print answer(xs)
