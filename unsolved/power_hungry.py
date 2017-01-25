@@ -31,60 +31,54 @@ Output:
 """
 
 def answer(xs):
+
     input_list = xs
+
     positive_list = []
     negative_list = []
 
     for i, num in enumerate(input_list):
         if 0 < num <= 1000:
-            # 正の数
+            # positive numbers
             positive_list.append(num)
         elif -1000 <= num < 0:
-            # 負の数
+            # negative numbers
             negative_list.append(num)
 
-    # 大きい順に並べ替え
-    positive_list.reverse()
-    print 'positive_list.reverse():', positive_list
+    positive_list.sort()
+    negative_list.sort()
+    print 'positive_list.sort():', positive_list
+    print 'negative_list.sort():', negative_list
 
-    # 絶対値が大きい順に並べ替え
-    negative_list.reverse()
-    print 'negative_list.reverse():', negative_list
-
-    multi_positive = 1
-    multi_negative = 1
-
-    # 正の数の掛け算の合計
+    # For multiplying positive numbers
+    multiplied_positive = 1
     for i, num in enumerate(positive_list):
-        multi_positive *= num
+        multiplied_positive *= num
+    # print 'multiplied_positive:', multiplied_positive
 
-    print 'multi_positive:', multi_positive
-
-    # 負の数の掛け算の合計
-    negative_list_length = len(negative_list)
-    if negative_list_length % 2 == 0:
-        # 偶数個の要素の場合
+    # For multiplying negative numbers
+    multiplied_negative = 1
+    if len(negative_list) % 2 == 0:
+        # the number of elements of the list is even
         for i, num in enumerate(negative_list):
-            print 'num:', num
-            multi_negative *= num
+            # print 'num:', num
+            multiplied_negative *= num
     else:
-        # 奇数個の要素の場合
+        # the number of elements of the list is odd
         for i in range(len(negative_list) - 1):
             print 'num:', negative_list[i]
-            multi_negative *= negative_list[i]
+            multiplied_negative *= negative_list[i]
 
-    print 'multi_negative:', multi_negative
+    # print 'multiplied_negative:', multiplied_negative
 
-    result = str(multi_positive * multi_negative)
-
-    print 'result:', type(result), result
+    result = str(multiplied_positive * multiplied_negative)
 
     return result
 
 # xs = [2, 0, 2, 2, 0]
 #"8"
 
-xs = [-2, -3, 4, 3, -5, -101, -102, 0]
+xs = [-2, -3, 4, -5]
 #"60"
 
 print answer(xs)
