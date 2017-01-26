@@ -36,6 +36,7 @@ def answer(xs):
 
     positive_list = []
     negative_list = []
+    zero_list = []
 
     for i, num in enumerate(input_list):
         if 0 < num <= 1000:
@@ -44,41 +45,57 @@ def answer(xs):
         elif -1000 <= num < 0:
             # negative numbers
             negative_list.append(num)
+        else:
+            zero_list.append(num)
 
     positive_list.sort()
     negative_list.sort()
-    print 'positive_list.sort():', positive_list
-    print 'negative_list.sort():', negative_list
 
     # For multiplying positive numbers
     multiplied_positive = 1
     for i, num in enumerate(positive_list):
         multiplied_positive *= num
-    # print 'multiplied_positive:', multiplied_positive
+
 
     # For multiplying negative numbers
     multiplied_negative = 1
+    # The number of elements of negative_list is:
     if len(negative_list) % 2 == 0:
-        # the number of elements of the list is even
+        # Even
         for i, num in enumerate(negative_list):
             # print 'num:', num
             multiplied_negative *= num
     else:
-        # the number of elements of the list is odd
+        # Odd
         for i in range(len(negative_list) - 1):
             print 'num:', negative_list[i]
             multiplied_negative *= negative_list[i]
 
-    # print 'multiplied_negative:', multiplied_negative
+    result = ['']
 
-    result = str(multiplied_positive * multiplied_negative)
+    if len(positive_list) == 0:
+        # Odd のところでは、nagative_list が1個の要素でも1を返してるので
+        # ここでは or len(negative_list) == 1 も必要
+        if len(negative_list) == 0 or len(negative_list) == 1:
+            result[0] = '0'
+        else:
+            result[0] = str(multiplied_negative)
+            # result[0] = str(multiplied_positive * multiplied_negative)
+    else:
+        result[0] = str(multiplied_positive * multiplied_negative)
 
-    return result
+    return result[0]
 
 # xs = [2, 0, 2, 2, 0]
 #"8"
 
-xs = [-2, -3, 4, -5]
+# xs = [-2, -3, 4, -5]
 #"60"
+
+xs = [2, 0, 2, -2, 0]
+#"4"
+
+# xs = [0, 0, 0, 0]
+#"0"
 
 print answer(xs)
