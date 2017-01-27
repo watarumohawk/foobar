@@ -30,61 +30,74 @@ Output:
     (string) "60"
 """
 
-def answer(xs):
 
-    input_list = xs
+def make_lists(input_list):
 
-    positive_list = []
-    negative_list = []
-    zero_list = []
+    p_list = []
+    n_list = []
+    z_list = []
 
     for i, num in enumerate(input_list):
         if 0 < num <= 1000:
-            # positive numbers
-            positive_list.append(num)
+            p_list.append(num)
         elif -1000 <= num < 0:
-            # negative numbers
-            negative_list.append(num)
+            n_list.append(num)
         else:
-            zero_list.append(num)
+            z_list.append(num)
+
+    return p_list, n_list, z_list
+
+
+def multiply_p(list_name):
+
+    multiplied_result = 1
+
+    for i, num in enumerate(list_name):
+        multiplied_result *= num
+
+    return multiplied_result
+
+
+def multiply_n(list_name):
+
+    multiplied_result = 1
+
+    if len(list_name) % 2 == 0:
+        # Even
+        for i, num in enumerate(list_name):
+            multiplied_result *= num
+    else:
+        # Odd
+        for j in range(len(list_name) - 1):
+            multiplied_result *= list_name[j]
+
+    return multiplied_result
+
+
+def answer(xs):
+
+    positive_list, negative_list, zero_list = make_lists(xs)
 
     positive_list.sort()
     negative_list.sort()
 
     # For multiplying positive numbers
-    multiplied_positive = 1
-    for i, num in enumerate(positive_list):
-        multiplied_positive *= num
-
+    multiplied_positive = multiply_p(positive_list)
 
     # For multiplying negative numbers
-    multiplied_negative = 1
-    # The number of elements of negative_list is:
-    if len(negative_list) % 2 == 0:
-        # Even
-        for i, num in enumerate(negative_list):
-            # print 'num:', num
-            multiplied_negative *= num
-    else:
-        # Odd
-        for i in range(len(negative_list) - 1):
-            print 'num:', negative_list[i]
-            multiplied_negative *= negative_list[i]
-
-    result = ['']
+    multiplied_negative = multiply_n(negative_list)
 
     if len(positive_list) == 0:
         # Odd のところでは、nagative_list が1個の要素でも1を返してるので
         # ここでは or len(negative_list) == 1 も必要
         if len(negative_list) == 0 or len(negative_list) == 1:
-            result[0] = '0'
+            result = '0'
         else:
-            result[0] = str(multiplied_negative)
-            # result[0] = str(multiplied_positive * multiplied_negative)
+            result = str(multiplied_negative)
     else:
-        result[0] = str(multiplied_positive * multiplied_negative)
+        result = str(multiplied_positive * multiplied_negative)
 
-    return result[0]
+    return result
 
 # xs = [2, 0, 2, 2, 0]
 #"8"
@@ -92,10 +105,10 @@ def answer(xs):
 # xs = [-2, -3, 4, -5]
 #"60"
 
-xs = [2, 0, 2, -2, 0]
+# xs = [2, 0, 2, -2, 0]
 #"4"
 
-# xs = [0, 0, 0, 0]
-#"0"
+xs = [0, 0, 0, 0, 3, 9, -10]
+
 
 print answer(xs)
